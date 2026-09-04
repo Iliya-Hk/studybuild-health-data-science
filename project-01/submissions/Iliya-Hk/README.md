@@ -160,7 +160,7 @@ This project is an **educational data science exercise**, not a validated clinic
 │   ├── confusion_matrix_3class_dt.png
 │   ├── pca_risk_groups_dt.png
 │   └── feature_importance_and_roc_dt.png
-├── analysis/
+├── Notebooks/
 │   └── analysis.ipynb
 ├── Report/
 │   └── analysis.pdf
