@@ -1,121 +1,82 @@
-<div align="center">
+# StudyBuild | Health & Medical Data Science
 
-# 🩺 Maternal Health Risk Stratification
+This repository contains project-based learning activities for the **Health & Medical Data Science** track at StudyBuild.
 
-**Interpretable Machine Learning for Maternal Risk Screening**
-
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-SQLite-07405E?logo=sqlite&logoColor=white)
-![Status](https://img.shields.io/badge/status-completed-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-*Statistical analysis, exploratory data analysis, and interpretable ML on the UCI Maternal Health Risk dataset*
-
-</div>
+The goal of this track is to work with real-world health datasets and practice the complete analytical workflow — from understanding the data and defining the problem to analysis, modeling, evaluation, interpretation, and communication.
 
 ---
 
-## 📌 Overview
+## Projects
 
-Digital health systems and low-cost IoT sensors now make it possible to monitor blood pressure, glucose, temperature, and heart rate at scale. This project analyzes real-world sensor data collected from hospitals and community clinics in **rural Bangladesh**, asking:
+### Project 01 — Maternal Health Risk Stratification
 
-> Can a small set of routine physiological variables distinguish **Low / Mid / High** maternal risk — and can a simple, interpretable model flag High-Risk patients with useful sensitivity?
+In this project, participants analyze maternal health data to investigate factors associated with different levels of health risk and build a baseline model for identifying high-risk cases.
 
-The goal isn't the highest possible accuracy — it's a transparent, explainable **screening baseline** that a health worker could actually reason about.
+**Main topics:**
+- Health data exploration
+- Data quality assessment
+- Risk factor analysis
+- Clinical data visualization
+- Classification modeling
+- Model evaluation
+- High-risk case detection
+- Interpretation and limitations
 
-## 📊 Dataset
+**Dataset:** UCI Maternal Health Risk Dataset
 
-| Variable | Unit | Description |
-|---|---|---|
-| `Age` | years | Maternal age |
-| `SystolicBP` / `DiastolicBP` | mmHg | Blood pressure |
-| `BS` | mmol/L | Blood sugar |
-| `BodyTemp` | °F | Body temperature |
-| `HeartRate` | bpm | Heart rate |
-| `RiskLevel` | — | Target: Low / Mid / High |
+> This project is designed for educational purposes and should not be interpreted as a clinical diagnostic system.
 
-**Cleaning summary:**
+---
 
-| Step | Result |
-|---|---|
-| Raw records | 1,014 |
-| Missing values | 0 — none found |
-| Exact duplicates | 562 — kept (plausible sensor rounding) |
-| Invalid `HeartRate` (= 7 bpm) | 2 — removed |
-| **Final dataset** | **1,012** patients (Low 404 · Mid 336 · High 272) |
+## Project Structure
 
+Each project should include:
 
-- **Parallel SQL layer:** 9 documented SQLite queries reproduce every group summary and threshold check directly on the cleaned table — no pandas required.
-- **Leakage-safe split:** stratified 80/20 train/test (`random_state=42`), `StandardScaler` fit on training data only.
-- **Two models trained and compared:**
+- `README.md`
+- Jupyter Notebook and/or Python scripts
+- Data source and documentation
+- Analysis and visualizations
+- Model evaluation when applicable
+- Interpretation of results
+- Limitations
+- Reproducible project structure
 
-```python
-# Multinomial Logistic Regression
-scaler = StandardScaler().fit(X_train)
-logreg = LogisticRegression(max_iter=2000, random_state=42)
-logreg.fit(scaler.transform(X_train), y_train)
+---
 
-# Decision Tree — final model (shallow & interpretable)
-tree = DecisionTreeClassifier(max_depth=4, min_samples_leaf=15, random_state=42)
-tree.fit(X_train, y_train)
-```
+## Submission Workflow
 
-The tree stays shallow (`max_depth=4`) so every split — minimizing Gini impurity `1 − Σpₖ²` — can be read as a plain-language threshold rule.
+1. Fork this repository
+2. Create your project folder
+3. Complete the analysis
+4. Document your decisions in the README
+5. Commit your work
+6. Open a Pull Request
 
-## 🔍 Key Findings
+Example:
 
-- **Blood Sugar is the strongest signal** — mean 12.12 mmol/L (High) vs. 7.22 (Low); a simple `BS ≥ 11` rule catches 62.5% of High-Risk patients vs. just 1–9.5% of Low/Mid.
-- **Blood pressure & age rise with risk**, but Low/Mid groups overlap significantly.
-- **Heart Rate barely separates the classes** — no single variable is a perfect predictor on its own.
-- The **BS × Systolic BP** relationship shows High-Risk patients clustering at high values of both, hinting that `RiskLevel` may itself be partly threshold-derived.
+project-01/
+└── submissions/
+    └── your-username/
+        ├── README.md
+        ├── notebook.ipynb
+        └── outputs/
 
-## 🏆 Results
+---
 
-| Model | Accuracy | Macro F1 | High-Risk Recall | High-Risk Precision |
-|---|---|---|---|---|
-| Logistic Regression | 0.586 | 0.584 | 0.782 | 0.768 |
-| **Decision Tree ✅ (selected)** | **0.680** | **0.670** | **0.836** | **0.920** |
+## What We Focus On
 
-**Per-class performance (Decision Tree):**
+StudyBuild projects are not about producing the most complicated model.
 
-| Class | Precision | Recall | F1 |
-|---|---|---|---|
-| Low Risk | 0.614 | 0.864 | 0.718 |
-| Mid Risk | 0.564 | 0.328 | 0.415 |
-| High Risk | 0.920 | 0.836 | 0.876 |
+We focus on:
 
-**Feature importance:** Blood Sugar (~50%) and Systolic BP (~33%) drive most of the model's decisions — fully consistent with the EDA. The main confusion is between Low and Mid classes, not High-Risk detection.
+**Problem Understanding → Data → Analysis → Evaluation → Interpretation → Decision**
 
-## 💡 Conclusion
+Participants are expected to explain **why** they made each analytical decision, not only show the code they used.
 
-Across three independent methods — descriptive statistics, SQL queries, and machine learning — **Blood Sugar and blood pressure consistently emerged as the dominant risk drivers.** The final Decision Tree reached **83.6% recall** and **92% precision** on High-Risk patients: a strong result for an interpretable baseline.
+---
 
-> ⚠️ This is a transparent research baseline — **not a validated clinical decision tool.**
+## About StudyBuild
 
-## ⚠️ Limitations
+StudyBuild is a project-based learning community focused on Data, AI, and research.
 
-- Rural Bangladesh cohort only — limited generalizability
-- Only 6 predictors (no obstetric history, labs, comorbidities)
-- 562 duplicate rows reduce effective sample diversity
-- No external validation cohort
-- Small High-Risk test set (n = 55) → recall has sampling variability
-
-## 🚀 Getting Started
-
-```bash
-pip install pandas numpy scikit-learn matplotlib seaborn
-
-python pipeline.py                          # run the full analysis
-sqlite3 maternal_health.db < queries.sql    # run the SQL layer
-```
-
-## 👤 Author
-
-**Mahdiyeh Mirzaei**
-🏢 StudyBuild
-🔗 [github.com/mahdiyeh-mirzaei-v2](https://github.com/mahdiyeh-mirzaei-v2)
-
-<div align="center">
-<sub>Educational research project — not intended for clinical diagnosis or decision-making.</sub>
-</div>
+Our goal is to turn theoretical knowledge into practical projects that can become part of a professional GitHub portfolio.
