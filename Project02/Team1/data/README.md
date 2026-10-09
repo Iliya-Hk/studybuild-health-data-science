@@ -150,4 +150,3 @@ The `diabetic_data.csv` dataset is a rich and comprehensive resource for analyzi
 
 ---
 
-> **Prepared by:** [Name] > **Date:** [Date] >
