@@ -386,41 +386,19 @@ readmission-risk-modeling/
 ├── README.md
 ├── requirements.txt
 ├── notebooks/
-│   ├── Clean-EDA-Final.ipynb          # Part 1: EDA and preprocessing
-│   └── analysis.ipynb                  # Part 2: Modeling and evaluation
+│   ├── Cleaning & EDA.ipynb          # Part 1: EDA and preprocessing
+│   └── Machine Learning Analysis and Evaluation.ipynb                  # Part 2: Modeling and evaluation
 ├── src/
 │   └── model.py (optional)
 ├── figures/
-│   ├── cm_val_lr_baseline_thr050.png
-│   ├── cm_val_lr_baseline_thr047.png
-│   ├── cm_val_dt_depth4_thr050.png
-│   ├── cm_test_tuned_xgboost_test_thr011.png
-│   ├── roc_pr_val_lr_baseline_thr050.png
-│   ├── roc_pr_val_lr_baseline_thr047.png
-│   ├── roc_pr_test_tuned_xgboost_test_thr011.png
-│   ├── calibration_val_lr_baseline_thr047.png
-│   ├── calibration_val_dt_depth4_thr050.png
-│   ├── calibration_test_tuned_xgboost_test_thr011.png
-│   ├── metrics_val_lr_baseline_thr050.png
-│   ├── metrics_val_lr_baseline_thr047.png
-│   ├── metrics_val_dt_depth4_thr050.png
-│   ├── metrics_test_tuned_xgboost_test_thr011.png
-│   ├── comparison_metrics_all_models_val.png
-│   ├── comparison_roc_all_models_val.png
-│   ├── comparison_pr_all_models_val.png
-│   ├── q6_fn_by_los.png
-│   ├── q6_fn_by_diag_group.png
-│   ├── q7_lr_coefficients.png
-│   ├── q7_xgb_gain.png
-│   ├── q8_fairness_recall_race.png
-│   ├── q8_fairness_recall_gender.png
-│   └── q8_fairness_recall_age_group.png
 ├── report/
-│   └── Report.pdf
+│   ├── part1&2 - report.docx
+│   └── part1&2 - report.pdf
 ├── data/
 │   ├── diabetic_data.csv
 │   ├── diabetic_cleaned.csv
 │   ├── patient_ids_for_split.csv
+│   ├── IDS_mapping.csv
 │   └── README.md
 └──
 
