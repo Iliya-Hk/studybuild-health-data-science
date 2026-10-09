@@ -443,7 +443,7 @@ Install with: `pip install -r requirements.txt`
 
 4. **Run Part 1 — EDA Notebook:**
    ```bash
-   jupyter notebook notebooks/Clean-EDA-Final.ipynb
+   jupyter notebook notebooks/Cleaning & EDA.ipynb
    ```
    - Run all cells sequentially
    - Generates cleaned dataset and patient IDs for split
@@ -451,7 +451,7 @@ Install with: `pip install -r requirements.txt`
 
 5. **Run Part 2 — Modeling Notebook:**
    ```bash
-   jupyter notebook notebooks/analysis.ipynb
+   jupyter notebook notebooks/Machine Learning Analysis and Evaluation.ipynb
    ```
    - Run all cells sequentially
    - Figures saved to `./figures/`
